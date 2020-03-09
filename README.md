@@ -124,7 +124,7 @@ You can modify the format file `mam.fmt` as you want.
 
 So in the `mam_scraper.py`, the data file will be inserted into database by directly using `bcp` command.
 
-# 3.Display
+# 4.Display
 
 To install dashboard in python, use `pip`:
 
