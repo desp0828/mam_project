@@ -4,7 +4,7 @@ This project is a combination of scraper, database and web. It is deployed on th
 
 Build a data pipeline from **web** to **sql database** and present the result using **dashboard**.
 
-#### i. Create an Azure sql database, ubuntu 18.04 virtual machine, app service plan
+#### i. Create an mssql sql database, virtual machine
 
 #### ii. Web scraping the following https://www.ccilindia.com/FPI_ARCV.aspx. Create the data store using the following two steps:
 
@@ -12,7 +12,7 @@ Build a data pipeline from **web** to **sql database** and present the result us
 
 ##### b. Increment: create scheduled task to web scrape the website hourly. If there is any update, insert the incremental records into the database. Use **crontab** to schedule the run.
 
-#### iii. Present the result in **dashboard**. Use dash to make the dashboard deploy on Azure web app service. The dashboard has the following function: select one ISIN in dropdown list, the chart will plots the time series of the daily Indicative Value Of Aggregate Holding of FPIS (INR CR#) for that ISIN.
+#### iii. Present the result in **dashboard**. The dashboard has the following function: select one ISIN in dropdown list, the chart will plots the time series of the daily Indicative Value Of Aggregate Holding of FPIS (INR CR#) for that ISIN.
 
 # 2.Web scraping
 
@@ -39,7 +39,7 @@ So the most difficult thing for scraping is: these long irregular strings will c
 We use the following method:
 
 #### i. Firstly, use 'urllib2.Request' to get these fileds' values for the first time posting.
-#### ii. Then use the previously obtained values to fill postdata structure and post it to the server. For the first time, only the date list is gotten from the server and it can be used for checking whether there is any updates on the web.
+#### ii. Then use the previously obtained values to fill postdata structure and post it to the server. For the first time, only the date list is gotten from the server and it can be used for checking whether there is any update on the web.
 #### iii. After checking updates, there are three functions to process when: a) there is no update; b) there are updates; c) the program is the first time to run.
 #### iv. If the program goes b) and c), it will need to post on this url for lots of times. Here, during each posting, we should store the fields' values mentioned before and use them in the next posting. Just like the first time.
 
@@ -54,7 +54,7 @@ IN0020150010,07.68 GS 2023,10003.15700,88132.01200,11.35,2020-02-14
 IN0020070028,08.08 GS 2022,7594.44100,68969.41100,11.01,2020-02-14
 ```
 
-Running method: `python mam_scraper.py`
+Running method: `python mam_scraper.py`. Before executing, you should modify the personal information, such as username and password.
 
 ***Using `crontab` to set program running hourly.***
 
@@ -143,7 +143,7 @@ Other requirements are shown in `dash-az/requirements.txt`
 
 The `application.py` is very easy as it is rewritten from the basic framework of dashboard. The logic is: First, query the database to get all the ISINs. The ISINs are stored in an array for the dropdown displaying. After each time the dropdown is clicked, a callback function will be triggered to query the database and return the corresponding 'date' and 'INR'. Arrays of these two values are directly used as the x and y coordinates of the drawing, respectively.
 
-To run as: `python application.py`
+To run as: `python application.py`. Also, you should fill in your own SQL information.
 
 You can also run it in the background: `nohup python application.py &` and kill it by `pkill application.py`
 
