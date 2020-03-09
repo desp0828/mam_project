@@ -1,0 +1,8 @@
+14.0
+6
+1       SQLCHAR             0       20      ","    1     ISIN                                                 SQL_Latin1_General_CP1_CI_AS
+2       SQLCHAR             0       50      ","    2     SD                                                   SQL_Latin1_General_CP1_CI_AS
+3       SQLCHAR          0       19      ","    3     INR                                                  ""
+4       SQLCHAR          0       19      ","    4     Security_INR                                         ""
+5       SQLCHAR          0       19      ","    5     Sec_Holding                                          ""
+6       SQLCHAR             0       3       "\n"     6     Date                                                 ""
